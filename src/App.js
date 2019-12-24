@@ -14,32 +14,54 @@ class App extends Component {
     description: undefined
   };
 
+  // fetchWeather = async (e) => {
+  //   e.preventDefault();
+  //   const city = e.target.elements.city.value;
+  //   const country = e.target.elements.country.value;
+
+  //   const call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${api_key}`);
+  //   const data = await call.json();
+
+  //   if (city && country) {
+  //     this.setState({
+  //       city: data.name,
+  //       country: data.sys.country,
+  //       temp: data.main.temp,
+  //       humidity: data.main.humidity,
+  //       description: data.weather[0].description
+  //     });
+  //   }
+
+  //   console.log(data);
+  // };
+
   fetchWeather = async (e) => {
     e.preventDefault();
     const city = e.target.elements.city.value;
     const country = e.target.elements.country.value;
 
-    const call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${api_key}`);
-    const data = await call.json();
-
     if (city && country) {
-      this.setState({
-        city: data.name,
-        country: data.sys.country,
-        temp: data.main.temp,
-        humidity: data.main.humidity,
-        description: data.weather[0].description
-      });
-    }
+      try {
+        const call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${api_key}`);
+        const data = await call.json();
 
-    console.log(data);
+        this.setState({
+          city: data.name,
+          country: data.sys.country,
+          temp: data.main.temp,
+          humidity: data.main.humidity,
+          description: data.weather[0].description
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   render() {
     return (
       <div>
         <h1>Weather App </h1>
-
         <Form loadWeather={this.fetchWeather} />
         <Weather
           city={this.state.city}
