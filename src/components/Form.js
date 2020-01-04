@@ -6,7 +6,6 @@ export class Form extends Component {
       <div>
         <form onSubmit={this.props.loadWeather}>
           <input type='text' placeholder='city' name='city' />
-          <input type='text' placeholder='country' name='country' />
           <button>Submit</button>
         </form>
       </div>
