@@ -7,13 +7,9 @@ const key = '8e0a9d7809e51984fbfc4e1ada1d6265';
 
 class App extends Component {
   state = {
-    city: undefined,
-    country: undefined,
-    temp: undefined,
-    condition: undefined,
-    humidity: undefined,
-    icon: undefined,
-    unit: 'C'
+    weather: undefined,
+    unit: 'C',
+    hourForecast: undefined
   };
 
   fetchWeather = async (e) => {
@@ -23,19 +19,21 @@ class App extends Component {
     if (city) {
       try {
         const call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`);
-
         const data = await call.json();
 
-        console.log(data);
-
         this.setState({
-          city: data.name,
-          country: data.sys.country,
-          temp: data.main.temp,
-          humidity: data.main.humidity,
-          condition: data.weather[0].description,
-          icon: data.weather[0].icon
+          weather: { ...data }
         });
+
+        if (city !== undefined) {
+          const call = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${key}&units=metric`);
+          const data = await call.json();
+          console.log(data.list);
+
+          this.setState({
+            hourForecast: data.list
+          });
+        }
       } catch (err) {
         console.log(err);
       }
@@ -49,13 +47,14 @@ class App extends Component {
   };
 
   testFetch = async () => {
-    const call = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=London&appid=${key}`);
+    const call = await fetch(``);
     const data = await call.json();
+
     console.log(data);
   };
 
   componentDidMount() {
-    this.testFetch();
+    // this.fetchWeather();
   }
 
   render() {
@@ -66,13 +65,15 @@ class App extends Component {
         <header>
           <h1>Weather app</h1>
           <form onChange={this.handleUnits}>
-            <input type='radio' value='C' name='unit' checked={unit === 'C'} />C
-            <input type='radio' value='F' name='unit' checked={unit === 'F'} />F
+            <input type='checkbox' className='checkbox' value='C' name='unit' checked={unit === 'C'} />
+            °C
+            <input type='checkbox' className='checkbox' value='F' name='unit' checked={unit === 'F'} />
+            °F
           </form>
         </header>
 
         <Form loadWeather={this.fetchWeather} />
-        <Weather {...this.state} />
+        {this.state.weather !== undefined && <Weather {...this.state} />}
       </div>
     );
   }

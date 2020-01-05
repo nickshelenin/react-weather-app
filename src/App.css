@@ -1,7 +1,8 @@
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: center;
   margin: 0;
+  color: #505050;
 }
 
 header {
@@ -9,12 +10,140 @@ header {
   justify-content: space-around;
   align-items: center;
   border-bottom: 1px solid #ccc;
-  height: 50px;
+  height: 70px;
   margin-bottom: 3em;
+  background: #353432;
+  color: #fff;
+  width: 100%;
 }
 
-.weather-cards {
-  margin-top: 3em;
+.checkbox {
+  cursor: pointer;
+}
+
+.bg--dark {
+  background: #4e4d4a;
+  color: #fff;
+  padding: 0.2em 0.7em;
+  border-radius: 3em;
+  margin-right: 1em;
+  font-size: 0.8rem;
+}
+
+.text--italic {
+  font-style: italic;
+}
+
+.text--orange {
+  color: #e96e50;
+}
+
+.weather-search-form {
+  margin: 5em 0;
+}
+
+.weather-search-form input {
+  border: 1px solid #e96e50;
+  height: 30px;
+  width: 200px;
+  padding: 0 1em;
+  border-radius: 5px;
+  outline: none;
+}
+
+.weather-search-form button {
+  background-color: #e96e50;
+  height: 30px;
+  width: 90px;
+  border: none;
+  border-radius: 5px;
+  margin-left: 1em;
+  color: #fff;
+  padding: 6px 12px;
+  outline: none;
+  cursor: pointer;
+}
+
+.weather-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 85%;
+  margin: auto;
+}
+
+.main-weather-container {
+  text-align: left;
+}
+
+.main-weather-container {
+  margin: 0;
+  padding: 0;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.mb {
+  margin-bottom: 2em;
+}
+
+.weather-table {
+  border-collapse: collapse;
+}
+
+.weather-table td {
+  border: 1px solid rgb(195, 195, 195);
+  padding: 0.8em;
+}
+
+.weather-table tr:nth-child(even) {
+  background: #f4f4f4;
+}
+
+.forecast-table {
+  align-items: center;
+  border-top: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  padding: 0.1em 1.5em;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  margin-right: 1 em;
+}
+
+.forecast-table__data {
+  display: flex;
+  align-items: center;
+}
+
+.forecast-table__image {
+  width: 50px;
+  height: 50px;
+}
+
+.forecast-table__row {
+}
+
+.forecast-table__row--right {
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+.data--bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.data--bottom span {
+  margin: 0 0.3em;
+}
+
+.forecast-table__data--right {
+  line-height: 1.5em;
 }
